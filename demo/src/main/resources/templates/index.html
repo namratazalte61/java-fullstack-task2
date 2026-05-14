@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Contact Management System</title>
+</head>
+<body>
+
+    <h1>Contact Form</h1>
+
+    <!-- Success Message -->
+    <p th:text="${message}"></p>
+
+    <!-- Form -->
+    <form action="/save" method="post">
+
+        <label>Name:</label>
+        <input type="text" name="name" required>
+        <br><br>
+
+        <label>Email:</label>
+        <input type="email" name="email" required>
+        <br><br>
+
+        <button type="submit">Save</button>
+
+    </form>
+
+    <br>
+    <hr>
+
+    <!-- Saved Contacts -->
+    <h2>Saved Contacts</h2>
+
+    <table border="1">
+
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Action</th>
+        </tr>
+
+        <tr th:each="c : ${contacts}">
+            <td th:text="${c.id}"></td>
+            <td th:text="${c.name}"></td>
+            <td th:text="${c.email}"></td>
+
+            <td>
+                <a th:href="@{/delete/{id}(id=${c.id})}">
+                    Delete
+                </a>
+            </td>
+        </tr>
+
+    </table>
+
+</body>
+</html>
